@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Déclaration </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Pour adaptation mobile -->
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      padding: 40px 10px;
+      background-color: #fff;
+      color: #183153;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      transition: background-color 0.5s;
+    }
+
+    h1 {
+      color: #1565c0;
+      font-size: 2.2rem;
+      font-weight: bold;
+      margin-bottom: 18px;
+      margin-top: 0;
+      line-height: 1.2;
+      max-width: 95vw;
+    }
+
+    input, button {
+      font-size: 1.1rem;
+      padding: 12px;
+      margin-top: 20px;
+      border-radius: 10px;
+      border: 2px solid #1565c0;
+      outline: none;
+      transition: all 0.3s;
+      background-color: #f4f8fb;
+      color: #183153;
+      width: 90vw;
+      max-width: 350px;
+      box-sizing: border-box;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    input:focus, button:focus {
+      border-color: #64b5f6;
+      box-shadow: 0 0 8px rgba(100, 181, 246, 0.3);
+    }
+
+    button {
+      background-color: #1565c0;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin-bottom: 20px;
+      margin-top: 15px;
+    }
+
+    button:hover, button:focus {
+      background-color: #0d47a1;
+    }
+
+    .message {
+      font-size: 1.2rem;
+      color: #1565c0;
+      font-weight: bold;
+      margin-top: 30px;
+      max-width: 95vw;
+      width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+      opacity: 0;
+      animation: fadeIn 2s forwards;
+      line-height: 1.5;
+      word-break: break-word;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .emoji {
+      font-size: 40px;
+      margin-left: 10px;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 6vw;
+      }
+      .message {
+        font-size: 5vw;
+        width: 98vw;
+        max-width: 98vw;
+      }
+      input, button {
+        font-size: 5vw;
+        padding: 10px;
+        width: 98vw;
+        max-width: 98vw;
+      }
+    }
+
+    @media (max-width: 400px) {
+      h1 {
+        font-size: 18px;
+      }
+      .message {
+        font-size: 14px;
+      }
+      input, button {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Entre ton prénom pour découvrir un message rempli d'amour !</h1>
+  <input type="text" id="nameInput" placeholder="Ton prénom..." oninput="showMessage()">
+  <button onclick="newMessage()">Encore ?</button>
+
+  <div id="message" class="message"></div>
+
+  <script>
+    // Liste de messages simples et pleins d'amour
+    const messages = [
+      "Tu es tout pour moi, {name}. 💖",
+      "Je pense à toi tout le temps, {name}. 😘",
+      "Mon cœur est à toi, {name}. 💓",
+      "{name}, tu es la personne la plus importante de ma vie. 💫",
+      "Tout ce que je veux, c'est être avec toi, {name}. 💕",
+      "{name}, tu es mon rêve devenu réalité. 🌟",
+      "Rien n'est plus beau que ton sourire, {name}. 😍",
+      "Chaque instant avec toi est un cadeau, {name}. 🎁",
+      "Je suis fou de toi, {name}. ❤️",
+      "Tu remplis mon cœur de bonheur, {name}. 💖",
+      "Je ne veux jamais te perdre, {name}. 💘",
+      "{name}, tu es mon amour éternel. 💍",
+      "Mon cœur bat pour toi, {name}. 💓",
+      "Avec toi, {name}, je me sens complet(e). 🌸",
+      "Je t'aime plus que tout, {name}. 😍",
+      "Je suis heureux(se) parce que tu es dans ma vie, {name}. 🌼"
+    ];
+
+    // Fonction pour afficher un message personnalisé avec animation
+    function showMessage() {
+      let name = document.getElementById("nameInput").value.trim();
+      if (name.length > 0 && name.toLowerCase() === "manon") {
+        let randomIndex = Math.floor(Math.random() * messages.length);
+        let randomMessage = messages[randomIndex];
+        document.getElementById("message").innerText = randomMessage.replace(/{name}/g, name);
+        document.getElementById("message").style.animation = "fadeIn 2s forwards"; // Animation
+      } else if (name.length > 0) {
+        document.getElementById("message").innerText = "Désolé, ce message est réservé à Manon !";
+        document.getElementById("message").style.animation = "fadeIn 2s forwards";
+      } else {
+        document.getElementById("message").innerText = '';
+      }
+    }
+
+    // Fonction pour générer un nouveau message au clic
+    function newMessage() {
+      let name = document.getElementById("nameInput").value.trim();
+      if (name.length > 0 && name.toLowerCase() === "manon") {
+        let randomIndex = Math.floor(Math.random() * messages.length);
+        let randomMessage = messages[randomIndex];
+        document.getElementById("message").innerText = randomMessage.replace(/{name}/g, name);
+        document.getElementById("message").style.animation = "fadeIn 2s forwards"; // Animation
+      } else if (name.length > 0) {
+        document.getElementById("message").innerText = "Désolé, ce message est réservé à Manon !";
+        document.getElementById("message").style.animation = "fadeIn 2s forwards";
+      }
+    }
+  </script>
+
+</body>
+</html>
